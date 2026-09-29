@@ -1,0 +1,24 @@
+/* ===========================================================
+   SMART REPINTURA — ANIMATIONS.CSS
+   Só microinterações: entrada discreta dos elementos ao rolar (scroll.js).
+   Depois da entrada o scroll.js remove estas classes e cada card volta
+   a usar as próprias transições de hover.
+=========================================================== */
+/* só esconde quando o JavaScript está ativo (a classe "js" é colocada no <html> logo no início);
+   sem JavaScript, tudo aparece normalmente */
+.js .reveal-up{
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity .6s var(--ease) var(--d, 0s), transform .6s var(--ease) var(--d, 0s);
+}
+.js .reveal-up.in-view{ opacity:1; transform:none; }
+
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .js .reveal-up{ opacity:1; transform:none; }
+}

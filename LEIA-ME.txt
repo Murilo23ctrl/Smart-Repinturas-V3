@@ -1,0 +1,107 @@
+SMART REPINTURA — SITE
+======================
+
+COMO O SITE ESTÁ ORGANIZADO
+---------------------------
+index.html ................ Home (ordem: header, hero, diferenciais, produtos,
+                            soluções, conteúdos, marcas, CTA final, rodapé)
+produtos/ ................. /produtos e as 8 categorias (abrasivos, mascaramento,
+                            preparacao, tintas-automotivas, vernizes, polimento,
+                            equipamentos, epi)
+solucoes/, colorimetria/, treinamentos/, suporte-tecnico/, consultoria/,
+cabines-de-pintura/, laboratorios-colorimetria/, conteudos/, sobre/, contato/
+  (as pastas das páginas ficam na raiz porque viram o endereço: site/produtos/, site/contato/...)
+css/style.css ............. todo o visual (escrito a partir do celular)
+css/animations.css ........ entrada discreta dos elementos
+js/ ....................... menu, busca, banners do hero, carrossel de vídeos, formulário
+                            (busca-indice.js é gerado: não edite à mão)
+sitemap.xml, robots.txt ... SEO
+
+assets/
+  icons/ .................. logo do site (logo-web) e ícone da aba (icon-192)
+  images/
+    hero/ ................. os 2 banners do topo (versões computador e celular)
+    produtos/ ............. fotos dos produtos (latas: massas, pu, verniz...)
+    categorias/ ........... foto de cada categoria (ainda não existe: crie ao colocar a 1ª)
+    solucoes/ ............. fotos dos cards de soluções
+    marcas/ ............... logos das marcas (ainda não existe: crie ao colocar o 1º)
+
+Pastas que NÃO são publicadas (o GitHub Pages ignora pastas que começam com "_"):
+_componentes/
+  dados.js ... contatos, WhatsApp, banners, categorias, soluções, vídeos e marcas
+  partes.js .. header, rodapé, busca, cards e CTA (o "desenho" de cada peça)
+  paginas.js . textos das páginas internas
+  gerar.js ... o gerador
+_originais/ ... arquivos que o site não usa, guardados para não perder: artes
+                originais em alta (logo.png, icon.png, hero-banner.png,
+                hero-banner2.png) e imagens antigas (yt-img, ml-img, zapzap-banner...).
+
+
+COMO EDITAR
+-----------
+1. Edite o que precisar em _componentes/dados.js (ou paginas.js / partes.js).
+2. Na pasta do site, rode:   node _componentes/gerar.js
+3. Pronto: menu, rodapé, cards e páginas são atualizados em todo o site,
+   e o sitemap.xml e a busca também.
+
+No index.html, só os trechos entre os marcadores COMPONENTE são refeitos pelo
+gerador. O resto do arquivo pode ser editado à mão normalmente.
+
+
+PENDÊNCIAS (dados que só a Smart pode passar)
+---------------------------------------------
+- Link do canal do YouTube ........ dados.js > contato.youtube
+- Link da página do Facebook ...... dados.js > contato.facebook
+  (enquanto estiver vazio, o ícone não aparece)
+- Vídeos: código e duração ......... dados.js > videos (id e duracao)
+  Ex.: em youtube.com/watch?v=AbC123xYz o código é AbC123xYz.
+  Com o código preenchido, a capa e o link do vídeo aparecem sozinhos.
+
+
+FOTOS (coloque o arquivo com o nome exato e rode o gerador)
+-----------------------------------------------------------
+Hero ............ 2 banners de fundo, trocando sozinhos (6 s cada), com o título
+                  do site por cima (computador: à esquerda · celular: no terço de baixo).
+                  A tag <picture> escolhe a arte certa para cada aparelho.
+                  Pasta assets/images/hero/:
+                    hero-banner-desktop.png  e  hero-banner2-desktop.jpg ... 1920 x 600 (computador/tablet)
+                    hero-banner-mobile.jpg   e  hero-banner2-mobile.jpg .... 400 x 600 (celular)
+                  Para trocar um banner: substitua o arquivo mantendo o nome e rode o gerador.
+                  (Se tiver as artes de celular em 800 x 1200, use: ficam mais nítidas.)
+                  Para adicionar um 3º banner ou mudar o tempo: dados.js > heroSlides / heroTempo.
+Categorias ...... assets/images/categorias/<categoria>.jpg  (800 x 600 px)
+                  abrasivos.jpg  mascaramento.jpg  preparacao.jpg
+                  tintas-automotivas.jpg  vernizes.jpg  polimento.jpg
+                  equipamentos.jpg  epi.jpg
+                  (sem foto: aparece o ícone ou a foto da lata que já existe)
+Produtos ........ assets/images/produtos/<arquivo>.jpg (foto de cada produto listado
+                  numa categoria; o nome do arquivo fica em dados.js > categorias > produtos)
+Soluções ........ assets/images/solucoes/<nome>.jpg  (900 x 700 px)
+                  color.jpg  academy.jpg  tech.jpg  consultoria.jpg
+                  cabines.jpg  lab.jpg
+                  (academy e consultoria ainda não têm foto: aparece o ícone)
+CTA final ....... assets/images/cta-traseira.jpg (traseira de carro, lanterna acesa)
+                  (sem foto: aparece um brilho de lanterna feito em CSS)
+Marcas .......... assets/images/marcas/<marca>.png ou .svg (fundo transparente)
+                  autoluks  mirka  itaqua  adere  adelbras  norton
+                  maxi-rubber  autoamerica   (sem logo: aparece o nome)
+
+Se trocar uma foto .jpg que tem versão .webp/.avif ao lado, o site passa a usar
+a .jpg nova automaticamente (o gerador só usa o WebP/AVIF se for mais recente).
+Para gerar WebP você mesmo: https://squoosh.app
+
+
+WHATSAPP
+--------
+Número principal (todos os botões): (16) 9.9785-0858  → 5516997850858
+Para trocar: dados.js > contato.whats e contato.whatsFmt, depois rode o gerador.
+As mensagens já saem identificadas, por exemplo:
+"Olá! Vim pelo site da Smart Repintura e gostaria de atendimento sobre Abrasivos."
+
+
+ENDEREÇO DO SITE (SEO)
+----------------------
+O canonical, o Open Graph e o sitemap usam:
+https://murilo23ctrl.github.io/Smart-Repinturas-V2/
+Se mudar para um domínio próprio: dados.js > SITE_URL, robots.txt e o <head>
+do index.html. Depois rode o gerador.
