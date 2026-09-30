@@ -141,7 +141,7 @@ function indiceBusca() {
     ...D.categorias.map(c => ({ t: c.nome, d: c.desc, u: `produtos/${c.slug}/index.html`, k: c.palavras })),
     ...D.categorias.flatMap(c => c.produtos.map(p => ({ t: p.nome, d: `Produto · ${c.nome}`, u: `produtos/${c.slug}/index.html`, k: c.palavras }))),
     { t: 'Soluções', d: 'Muito mais que uma loja de tintas', u: 'solucoes/index.html', k: 'servicos solucoes' },
-    ...D.solucoes.map(s => ({ t: s.menu, d: s.desc, u: `${s.slug}/index.html`, k: `${s.palavras} smart ${s.marca.toLowerCase()}` })),
+    ...D.solucoes.map(s => ({ t: s.menu, d: s.desc, u: `${s.slug}/index.html`, k: s.palavras })),
     { t: 'Conteúdos', d: 'Dicas técnicas e vídeos no YouTube', u: 'conteudos/index.html', k: 'videos youtube dicas conteudo' },
     ...D.videos.map(v => ({ t: v.titulo, d: `Vídeo · ${v.tag}`, u: 'conteudos/index.html', k: 'video ' + v.tag })),
     { t: 'A Smart', d: 'Sobre a Smart Repintura', u: 'sobre/index.html', k: 'sobre empresa quem somos' },

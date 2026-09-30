@@ -18,7 +18,12 @@ const contato = {
   horario: ['Segunda a Sexta', '7:30 às 17:18'],
   instagram: 'https://instagram.com/smart.repintura',
   youtube: 'https://youtube.com',     // PENDENTE: link do canal da Smart no YouTube
-  facebook: ''                        // PENDENTE: link da página do Facebook (vazio = ícone não aparece)
+  facebook: '',                       // PENDENTE: link da página do Facebook (vazio = ícone não aparece)
+  /* Webmail (rodapé, ao lado de "Contato"; vazio = link não aparece). Está em http porque o https do domínio
+     ainda dá erro de certificado; quando o SSL estiver certo, troque para https:// */
+  webmail: 'http://www.smartrepintura.com.br/webemail',
+  /* mapinha do rodapé: o que o Google Maps procura (o botão "Como chegar" abre a rota até aqui) */
+  mapaBusca: 'Smart Repintura, Av. Marechal Costa e Silva, 3435 - Campos Elísios, Ribeirão Preto - SP, 14075-600'
 };
 
 /* Categorias de produtos.
@@ -62,36 +67,39 @@ const categorias = [
 /* Soluções (cards da Home e páginas de serviço).
    Imagem: assets/images/solucoes/<imagem>.jpg (sem imagem = ícone). */
 const solucoes = [
-  { slug: 'colorimetria', marca: 'COLOR', menu: 'Colorimetria', nome: 'Colorimetria Automotiva',
+  { slug: 'colorimetria', menu: 'Colorimetria', nome: 'Colorimetria Automotiva',
     desc: 'Leitura, identificação, produção e ajuste fino de cores.',
     cta: 'Conhecer', destino: 'pagina', imagem: 'color', imagemAlt: 'Espectrofotômetro e software de colorimetria automotiva', icone: 'i-palette',
     palavras: 'colorimetria cor cores espectrofotometro ajuste de cor formula' },
-  { slug: 'treinamentos', marca: 'ACADEMY', menu: 'Treinamentos', nome: 'Treinamentos & Capacitação',
+  { slug: 'treinamentos', menu: 'Treinamentos', nome: 'Treinamentos & Capacitação',
     desc: 'Colorimetria, pintura, preparação, processos e produtividade.',
     cta: 'Ver treinamentos', destino: 'pagina', imagem: 'academy', imagemAlt: 'Treinamento técnico de repintura automotiva', icone: 'i-cap',
-    palavras: 'treinamento treinamentos curso cursos capacitacao academy' },
-  { slug: 'suporte-tecnico', marca: 'TECH', menu: 'Suporte Técnico', nome: 'Suporte Técnico',
-    desc: 'Diagnóstico de problemas de pintura e suporte para sua equipe.',
+    palavras: 'treinamento treinamentos curso cursos capacitacao' },
+  { slug: 'suporte-tecnico', menu: 'Suporte Técnico de Produtos', nome: 'Suporte Técnico de Produtos',
+    desc: 'Suporte no uso dos produtos, diagnóstico de problemas de pintura e apoio à sua equipe.',
     cta: 'Solicitar suporte', destino: 'whatsapp', imagem: 'tech', imagemAlt: 'Pintor automotivo aplicando tinta com pistola de pintura', icone: 'i-wrench',
-    palavras: 'suporte tecnico diagnostico problema defeito pintura ajuda' },
-  { slug: 'consultoria', marca: 'CONSULTORIA', menu: 'Consultoria', nome: 'Gestão de Oficinas',
+    palavras: 'suporte tecnico produto produtos diagnostico problema defeito pintura ajuda' },
+  { slug: 'consultoria', menu: 'Consultoria em Gestão de Oficinas', nome: 'Consultoria em Gestão de Oficinas',
     desc: 'Processos, custos, estoque, indicadores e redução de retrabalho.',
     cta: 'Conhecer', destino: 'pagina', imagem: 'consultoria', imagemAlt: 'Indicadores de gestão de oficina', icone: 'i-chart',
-    palavras: 'consultoria gestao oficina processos custos estoque indicadores retrabalho' },
-  { slug: 'cabines-de-pintura', marca: 'CABINES', menu: 'Cabines de Pintura', nome: 'Cabines de Pintura',
-    desc: 'Limpeza técnica, troca de filtros e manutenção preventiva.',
+    palavras: 'consultoria gestao oficina oficinas processos custos estoque indicadores retrabalho' },
+  { slug: 'cabines-de-pintura', menu: 'Manutenção em Cabines e Equipamentos', nome: 'Manutenção em Cabines e Equipamentos',
+    desc: 'Limpeza técnica, troca de filtros e manutenção preventiva de cabines e equipamentos.',
     cta: 'Solicitar orçamento', destino: 'whatsapp', imagem: 'cabines', imagemAlt: 'Cabine de pintura automotiva iluminada', icone: 'i-booth',
-    palavras: 'cabine cabines pintura limpeza filtro filtros manutencao plano aspirante' },
-  { slug: 'laboratorios-colorimetria', marca: 'LAB', menu: 'Laboratórios de Colorimetria', nome: 'Laboratórios de Colorimetria',
+    palavras: 'cabine cabines pintura limpeza filtro filtros manutencao equipamento equipamentos plano aspirante' },
+  { slug: 'laboratorios-colorimetria', menu: 'Laboratórios de Colorimetria', nome: 'Laboratórios de Colorimetria',
     desc: 'Implantação, organização, treinamento e padronização.',
     cta: 'Conhecer', destino: 'pagina', imagem: 'lab', imagemAlt: 'Prateleiras de sistema tintométrico em laboratório de cores', icone: 'i-flask',
     palavras: 'laboratorio laboratorios colorimetria tintometrico implantacao padronizacao' }
 ];
 
 /* Banners do hero da Home (trocam sozinhos, na ordem abaixo).
-   Cada banner tem duas artes em assets/images/hero/ (.jpg ou .png, nome sem extensão abaixo):
-     desktop ... computador e tablet: 1920 x 600 px (o centro tem a arte; as laterais, fundo desfocado)
-     mobile .... celular: 400 x 600 px
+   Cada banner tem duas artes em assets/images/hero/ (.jpg ou .png, nome sem extensão abaixo).
+   O hero fica com a proporção da arte do 1º banner e mostra a imagem inteira (sem cortar e sem fundo borrado):
+     desktop ... computador e tablet: 1920 x 1080 px (tela cheia) ou 1600 x 500 / 1200 x 400 px (faixa)
+     mobile .... celular: 800 x 1200 px ou 1080 x 1920 px (vertical)
+   Use o mesmo tamanho em todos os banners. O título do site fica por cima: à esquerda no
+   computador e na metade de baixo no celular (deixe essas áreas sem texto importante na arte).
    alt: o que está escrito/mostrado no banner (lido pelo Google e por leitores de tela).
    sombraForte: true = no computador, escurece bem a metade esquerda do banner (use quando ela
      tem texto/logo que ficaria "fantasma" atrás do título do site).

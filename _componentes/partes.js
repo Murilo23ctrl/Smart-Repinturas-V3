@@ -99,6 +99,8 @@ ${S('i-check', L('<path d="M5 12.5l4.2 4.2L19 7"/>'))}
 ${S('i-pin', L('<path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/>'))}
 ${S('i-phone', L('<path d="M5 4h3.5l1.8 4.6-2.3 1.4a11 11 0 0 0 5 5l1.4-2.3L19 14.5V18a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/>'))}
 ${S('i-clock', L('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'))}
+${S('i-mail', L('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/>'))}
+${S('i-route', L('<path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21Z"/><path d="M9.5 9.5 14.5 7.5 12.5 12.5 12 10z"/>'))}
 ${S('i-tools', L('<path d="M14.7 3.6a4.8 4.8 0 0 0-4.4 6.6L3.8 16.7a1.9 1.9 0 0 0 2.7 2.7l6.5-6.5a4.8 4.8 0 0 0 6.6-4.4l-2.9 1.4-2.5-2.5 1.4-2.9a4.8 4.8 0 0 0-.9-.9Z"/><path d="M4 4l5 5M3 6l3-3"/>'))}
 ${S('i-wrench', L('<path d="M14.7 3.6a4.8 4.8 0 0 0-4.4 6.6L3.8 16.7a1.9 1.9 0 0 0 2.7 2.7l6.5-6.5a4.8 4.8 0 0 0 6.6-4.4l-2.9 1.4-2.5-2.5 1.4-2.9a4.8 4.8 0 0 0-.9-.9Z"/>'))}
 ${S('i-cap', L('<path d="M2 9.5 12 5l10 4.5L12 14 2 9.5Z"/><path d="M6 11.5V16c0 1.3 2.7 3 6 3s6-1.7 6-3v-4.5"/><path d="M22 9.5V15"/>'))}
@@ -124,12 +126,23 @@ function header(base, ativo) {
   const a = (k) => (ativo === k ? ' class="active" aria-current="page"' : '');
   const cats = D.categorias.map(c => `<li><a href="${base}produtos/${c.slug}/index.html">${esc(c.nome)}</a></li>`).join('');
   const sols = D.solucoes.map(s => `<li><a href="${base}${s.slug}/index.html">${esc(s.menu)}</a></li>`).join('');
+  /* computador: 2 faixas (1ª logo + busca + WhatsApp · 2ª só os itens do menu)
+     celular/tablet: a 2ª faixa vira o menu lateral aberto pelo botão ☰ */
   return `<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a class="brand" href="${base}index.html" aria-label="Smart Repintura — página inicial">${logo(base)}</a>
 
-    <nav class="main-nav" id="mainNav" aria-label="Menu principal">
+    <button class="search-bar" type="button" data-open-search>${ico('i-search')}<span>Buscar produtos, soluções ou conteúdos</span><kbd aria-hidden="true">/</kbd></button>
+
+    <div class="header-actions">
+      <a class="btn btn-whats btn-sm header-wa" href="${wa(msg.geral)}" target="_blank" rel="noopener" aria-label="Comprar pelo WhatsApp">${ico('i-whats')}<span>Comprar pelo WhatsApp</span></a>
+      <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mainNav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+
+  <nav class="main-nav" id="mainNav" aria-label="Menu principal">
+    <div class="nav-inner">
       <ul class="nav-list">
         <li><a href="${base}index.html"${a('inicio')}>Início</a></li>
         <li class="has-sub">
@@ -151,14 +164,8 @@ function header(base, ativo) {
         <button class="btn btn-outline full" type="button" data-open-search>${ico('i-search')} Buscar no site</button>
         <a class="btn btn-whats full" href="${wa(msg.geral)}" target="_blank" rel="noopener">${ico('i-whats')} Comprar pelo WhatsApp</a>
       </div>
-    </nav>
-
-    <div class="header-actions">
-      <button class="icon-btn search-btn" type="button" data-open-search aria-label="Buscar no site">${ico('i-search')}</button>
-      <a class="btn btn-whats btn-sm header-wa" href="${wa(msg.geral)}" target="_blank" rel="noopener" aria-label="Comprar pelo WhatsApp">${ico('i-whats')}<span>Comprar pelo WhatsApp</span></a>
-      <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mainNav"><span></span><span></span><span></span></button>
     </div>
-  </div>
+  </nav>
 </header>`;
 }
 
@@ -181,9 +188,20 @@ function footer(base) {
   const fb = C.facebook
     ? `<li><a href="${C.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${ico('i-fb')}</a></li>`
     : '<!-- Facebook: preencha contato.facebook em _componentes/dados.js e rode o gerador -->';
+  const webmail = C.webmail
+    ? `<li><a class="fb-webmail" href="${C.webmail}" target="_blank" rel="noopener">${ico('i-mail')} Webmail</a></li>`
+    : '<!-- Webmail: preencha contato.webmail em _componentes/dados.js e rode o gerador -->';
+  const busca = encodeURIComponent(C.mapaBusca);
   return `<footer class="site-footer">
   <div class="container footer-inner">
-    <a class="footer-brand" href="${base}index.html" aria-label="Smart Repintura — página inicial">${logo(base, true)}</a>
+    <div class="footer-about">
+      <a class="footer-brand" href="${base}index.html" aria-label="Smart Repintura — página inicial">${logo(base, true)}</a>
+      <ul class="footer-social" aria-label="Redes sociais">
+        <li><a href="${C.youtube}" target="_blank" rel="noopener" aria-label="YouTube">${ico('i-yt')}</a></li>
+        <li><a href="${C.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${ico('i-insta')}</a></li>
+        ${fb}
+      </ul>
+    </div>
     <ul class="footer-info">
       <li>${ico('i-pin')}<span>${esc(C.endereco)}<br>${esc(C.cidade)}</span></li>
       <li class="fi-stack">
@@ -192,11 +210,12 @@ function footer(base) {
       </li>
       <li>${ico('i-clock')}<span>${esc(C.horario[0])}<br>${esc(C.horario[1])}</span></li>
     </ul>
-    <ul class="footer-social" aria-label="Redes sociais">
-      <li><a href="${C.youtube}" target="_blank" rel="noopener" aria-label="YouTube">${ico('i-yt')}</a></li>
-      <li><a href="${C.instagram}" target="_blank" rel="noopener" aria-label="Instagram">${ico('i-insta')}</a></li>
-      ${fb}
-    </ul>
+    <div class="footer-map">
+      <div class="fm-frame">
+        <iframe src="https://www.google.com/maps?q=${busca}&amp;z=16&amp;output=embed" title="Mapa com a localização da Smart Repintura" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a class="btn btn-outline btn-sm fm-btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=${busca}" target="_blank" rel="noopener">${ico('i-route')} Como chegar</a>
+    </div>
   </div>
   <div class="container footer-bottom">
     <nav aria-label="Links do rodapé">
@@ -208,6 +227,7 @@ function footer(base) {
         <li><a href="${base}conteudos/index.html">Conteúdos</a></li>
         <li><a href="${base}sobre/index.html">A Smart</a></li>
         <li><a href="${base}contato/index.html">Contato</a></li>
+        ${webmail}
       </ul>
     </nav>
     <p>© <span class="js-year">${new Date().getFullYear()}</span> Smart Repintura · Developed by Murilo</p>
@@ -257,7 +277,6 @@ function cardSolucao(s, base, tag = 'h3') {
   return `<li><article class="sol-card reveal-up">
         <div class="sol-media${f ? '' : ' sol-media--icone'}">${media}</div>
         <div class="sol-body">
-          <p class="sol-brand" aria-label="Smart ${esc(s.marca.toLowerCase())}"><span class="sb-smart">SMART</span><span class="sb-name">${esc(s.marca)}</span></p>
           <${tag}>${esc(s.nome)}</${tag}>
           <p>${esc(s.desc)}</p>
           <a class="btn btn-chrome btn-sm sol-btn" ${link}>${esc(s.cta)} ${ico('i-arrow')}</a>
@@ -279,20 +298,27 @@ function cardVideo(v, tag = 'h3') {
       </a></li>`;
 }
 
-/* ---------- marcas ---------- */
+/* ---------- marcas (faixa que roda sozinha; a lista é repetida para o giro não ter emenda) ---------- */
 function marcas(base) {
-  const itens = D.marcas.map(m => {
+  const itens = (copia) => D.marcas.map(m => {
     const arq = ['svg', 'png', 'webp'].map(e => `assets/images/marcas/${m.arquivo}.${e}`).find(existe);
     return arq
-      ? `<li class="brand-logo"><img src="${base}${arq}" alt="${esc(m.nome)}" loading="lazy" decoding="async"></li>`
+      ? `<li class="brand-logo"><img src="${base}${arq}" alt="${copia ? '' : esc(m.nome)}" loading="lazy" decoding="async"></li>`
       : `<li class="brand-logo brand-logo--texto">${esc(m.nome)}</li>`;
-  }).join('\n        ');
+  }).join('\n          ');
   return `<section class="brands" aria-labelledby="marcas-titulo">
-    <div class="container brands-inner">
+    <div class="container">
       <h2 class="eyebrow" id="marcas-titulo">Marcas que trabalhamos</h2>
-      <ul class="brands-row">
-        ${itens}
-      </ul>
+    </div>
+    <div class="brands-marquee">
+      <div class="brands-track">
+        <ul class="brands-row">
+          ${itens(false)}
+        </ul>
+        <ul class="brands-row" aria-hidden="true">
+          ${itens(true)}
+        </ul>
+      </div>
     </div>
   </section>`;
 }
@@ -305,6 +331,15 @@ function hero() {
     .map(s => ({ ...s, mob: foto(`assets/images/hero/${s.mobile}`), desk: foto(`assets/images/hero/${s.desktop}`) }))
     .filter(s => s.mob || s.desk);
   const varias = slides.length > 1;
+  /* o hero tem a proporção das artes do 1º banner, para mostrar a imagem inteira:
+     1920x1080 = tela cheia, 1600x500 ou 1200x400 = faixa, 800x1200 ou 1080x1920 = celular */
+  const razao = (f) => (f && f.dim ? f.dim.w / f.dim.h : null);
+  const difere = (f, g) => razao(f) && razao(g) && Math.abs(razao(f) - razao(g)) > 0.01;
+  const [d1, m1] = slides.length ? [slides[0].desk, slides[0].mob] : [];
+  slides.slice(1).forEach(s => {
+    if (difere(s.desk, d1) || difere(s.mob, m1)) console.warn(`  aviso: ${s.desktop}/${s.mobile} têm proporção diferente do 1º banner (o hero segue o 1º e corta as bordas deste)`);
+  });
+  const proporcao = [d1 && d1.dim && `--hero-ar-d:${d1.dim.w}/${d1.dim.h}`, m1 && m1.dim && `--hero-ar-m:${m1.dim.w}/${m1.dim.h}`].filter(Boolean).join(';');
   const imagens = slides.map((s, i) =>
     `<div class="hero-slide${s.sombraForte ? ' hero-slide--sombra-forte' : ''}${i ? '' : ' is-active'}"${i ? ' aria-hidden="true"' : ''}>${pictureArte(s.mob, s.desk, '', s.alt, { lazy: i > 0, prioridade: i === 0 })}</div>`
   ).join('\n      ');
@@ -313,7 +348,7 @@ function hero() {
         ${slides.map((s, i) => `<button class="hero-dot${i ? '' : ' is-active'}" type="button" aria-label="Mostrar banner ${i + 1} de ${slides.length}"${i ? '' : ' aria-current="true"'}><span class="hero-dot-bar"><span class="hero-dot-fill"></span></span></button>`).join('\n        ')}
         <button class="hero-pause" type="button" aria-label="Pausar troca de banners">${ico('i-pause', 'ico-pause')}${ico('i-play', 'ico-play')}</button>
       </div>` : '';
-  return `<section class="hero" id="topo">
+  return `<section class="hero" id="topo"${proporcao ? ` style="${proporcao}"` : ''}>
     <div class="container hero-inner">
       <div class="hero-content">
         <h1 class="hero-title"><span class="hero-kicker">Especialistas em</span> Repintura<br> <em>Automotiva</em></h1>
@@ -357,7 +392,7 @@ function ctaFinal(base, mensagem = msg.especialista) {
     <div class="fc-media" aria-hidden="true">${media}</div>
     <div class="container fc-inner">
       <div class="fc-text">
-        <h2 id="cta-titulo">Sua oficina pode produzir mais <br>e retrabalhar menos.</h2>
+        <h2 id="cta-titulo">Sua oficina pode produzir mais, <br>evitando retrabalhos.</h2>
         <p>Produtos, tecnologia, conhecimento e suporte técnico em um único lugar.</p>
       </div>
       <a class="btn btn-whats btn-lg" href="${wa(mensagem)}" target="_blank" rel="noopener">${ico('i-whats')} Falar com um Especialista ${ico('i-arrow')}</a>

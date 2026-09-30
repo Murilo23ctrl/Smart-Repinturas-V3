@@ -88,7 +88,7 @@ D.categorias.forEach(c => {
 paginas.push({
   caminho: 'solucoes/',
   titulo: 'Soluções para Oficinas de Repintura | Smart Repintura',
-  descricao: 'Colorimetria automotiva, treinamentos, suporte técnico, consultoria, cabines de pintura e laboratórios de colorimetria em Ribeirão Preto.',
+  descricao: 'Colorimetria automotiva, treinamentos, suporte técnico de produtos, consultoria em gestão de oficinas, manutenção em cabines e equipamentos e laboratórios de colorimetria em Ribeirão Preto.',
   nav: 'solucoes',
   migalhas: [{ nome: 'Soluções' }],
   eyebrow: 'Nossas Soluções',
@@ -110,11 +110,11 @@ paginas.push({
   ];
   paginas.push({
     caminho: 'colorimetria/',
-    titulo: 'Colorimetria Automotiva em Ribeirão Preto | Smart Color',
-    descricao: 'Leitura com espectrofotômetro, identificação de fórmula, pesagem, teste e ajuste fino de cores automotivas com a Smart Color.',
+    titulo: 'Colorimetria Automotiva em Ribeirão Preto | Smart Repintura',
+    descricao: 'Leitura com espectrofotômetro, identificação de fórmula, pesagem, teste e ajuste fino de cores automotivas com a Smart Repintura.',
     nav: 'colorimetria',
     migalhas: [{ nome: 'Soluções', url: 'solucoes/index.html' }, { nome: 'Colorimetria' }],
-    eyebrow: 'Smart Color',
+    eyebrow: 'Soluções',
     h1: 'Colorimetria <em>Automotiva</em>',
     lead: s.desc,
     acoes: () => btnWhats(msg.categoria('Colorimetria'), 'Falar com um especialista'),
@@ -138,17 +138,17 @@ paginas.push({
   ];
   paginas.push({
     caminho: 'treinamentos/',
-    titulo: 'Treinamentos de Colorimetria e Repintura | Smart Academy',
-    descricao: 'Treinamentos práticos de colorimetria, repintura automotiva, processos e produtividade, inclusive dentro da sua oficina. Smart Academy, Ribeirão Preto.',
+    titulo: 'Treinamentos de Colorimetria e Repintura | Smart Repintura',
+    descricao: 'Treinamentos práticos de colorimetria, repintura automotiva, processos e produtividade, inclusive dentro da sua oficina. Smart Repintura, Ribeirão Preto.',
     nav: 'treinamentos',
     migalhas: [{ nome: 'Soluções', url: 'solucoes/index.html' }, { nome: 'Treinamentos' }],
-    eyebrow: 'Smart Academy',
+    eyebrow: 'Soluções',
     h1: 'Treinamentos &amp; <em>Capacitação</em>',
     lead: s.desc,
     acoes: () => btnWhats(msg.categoria('Treinamentos'), 'Falar sobre treinamentos'),
     mensagem: msg.categoria('Treinamentos'),
     imagem: imgSolucao(s),
-    conteudo: () => secao(`<div class="section-top"><div><span class="eyebrow">Smart Academy</span>
+    conteudo: () => secao(`<div class="section-top"><div><span class="eyebrow">Treinamentos</span>
       <h2>Conhecimento que melhora o resultado da oficina.</h2>
       <p class="section-lead">Treinamentos práticos desenvolvidos para melhorar qualidade, produtividade e padronização.</p></div></div>
       <ul class="info-grid">${cursos.map(c => `<li class="info-card reveal-up"><span class="info-ico">${ico(c[0])}</span><h3>${c[1]}</h3><p>${c[2]}</p></li>`).join('')}</ul>`)
@@ -157,19 +157,19 @@ paginas.push({
 
 /* ---------- páginas de serviço (suporte, consultoria, cabines, laboratórios) ---------- */
 const servicos = [
-  { slug: 'suporte-tecnico', titulo: 'Suporte Técnico em Pintura Automotiva | Smart Tech',
-    descricao: 'Diagnóstico de problemas de pintura e suporte técnico para oficinas, profissionais e equipes de repintura. Smart Repintura, Ribeirão Preto.',
-    h1: 'Suporte <em>Técnico</em>', botao: 'Solicitar suporte',
-    titulo2: 'Como podemos ajudar', itens: ['Diagnóstico de problemas de pintura', 'Suporte técnico para oficinas e profissionais', 'Suporte para a sua equipe'] },
-  { slug: 'consultoria', titulo: 'Consultoria em Gestão de Oficinas | Smart Consultoria',
-    descricao: 'Consultoria para oficinas de funilaria e pintura: processos, produtividade, custos, estoque, indicadores e redução de retrabalho.',
-    h1: 'Gestão de <em>Oficinas</em>', botao: 'Quero conhecer',
+  { slug: 'suporte-tecnico', titulo: 'Suporte Técnico de Produtos para Pintura Automotiva | Smart Repintura',
+    descricao: 'Suporte técnico de produtos: uso correto, diagnóstico de problemas de pintura e apoio para oficinas, profissionais e equipes de repintura. Smart Repintura, Ribeirão Preto.',
+    h1: 'Suporte Técnico de <em>Produtos</em>', botao: 'Solicitar suporte',
+    titulo2: 'Como podemos ajudar', itens: ['Suporte no uso dos produtos', 'Diagnóstico de problemas de pintura', 'Suporte técnico para oficinas e profissionais', 'Suporte para a sua equipe'] },
+  { slug: 'consultoria', titulo: 'Consultoria em Gestão de Oficinas | Smart Repintura',
+    descricao: 'Consultoria em gestão de oficinas de funilaria e pintura: processos, produtividade, custos, estoque, indicadores e redução de retrabalho.',
+    h1: 'Consultoria em Gestão de <em>Oficinas</em>', botao: 'Quero conhecer',
     titulo2: 'O que a consultoria aborda', itens: ['Processos', 'Produtividade', 'Custos', 'Estoque', 'Indicadores', 'Redução de retrabalho'] },
-  { slug: 'cabines-de-pintura', titulo: 'Limpeza e Manutenção de Cabine de Pintura | Smart Cabines',
-    descricao: 'Limpeza técnica, troca de filtros e manutenção preventiva de cabines de pintura e plano aspirante em Ribeirão Preto e região.',
-    h1: 'Cabines de <em>Pintura</em>', botao: 'Solicitar orçamento',
-    titulo2: 'Serviços', itens: ['Limpeza técnica', 'Troca de filtros', 'Manutenção preventiva de cabines de pintura e plano aspirante'] },
-  { slug: 'laboratorios-colorimetria', titulo: 'Laboratórios de Colorimetria | Smart Lab',
+  { slug: 'cabines-de-pintura', titulo: 'Manutenção em Cabines de Pintura e Equipamentos | Smart Repintura',
+    descricao: 'Manutenção em cabines e equipamentos: limpeza técnica, troca de filtros e manutenção preventiva de cabines de pintura e plano aspirante em Ribeirão Preto e região.',
+    h1: 'Manutenção em Cabines e <em>Equipamentos</em>', botao: 'Solicitar orçamento',
+    titulo2: 'Serviços', itens: ['Limpeza técnica', 'Troca de filtros', 'Manutenção preventiva de cabines de pintura e plano aspirante', 'Manutenção de equipamentos'] },
+  { slug: 'laboratorios-colorimetria', titulo: 'Laboratórios de Colorimetria | Smart Repintura',
     descricao: 'Implantação, organização, treinamento e padronização de laboratórios de colorimetria para oficinas de repintura automotiva.',
     h1: 'Laboratórios de <em>Colorimetria</em>', botao: 'Quero conhecer',
     titulo2: 'Como trabalhamos', itens: ['Implantação', 'Organização', 'Treinamento', 'Padronização'] }
@@ -182,7 +182,7 @@ servicos.forEach(sv => {
     descricao: sv.descricao,
     nav: 'solucoes',
     migalhas: [{ nome: 'Soluções', url: 'solucoes/index.html' }, { nome: s.menu }],
-    eyebrow: `Smart ${s.marca.charAt(0) + s.marca.slice(1).toLowerCase()}`,
+    eyebrow: 'Soluções',
     h1: sv.h1,
     lead: s.desc,
     acoes: () => btnWhats(msg.categoria(s.nome), sv.botao),
@@ -223,8 +223,8 @@ paginas.push({
   conteudo: (base) => secao(`<div class="split">
       <div><span class="eyebrow">Quem somos</span><h2>Produto + conhecimento + tecnologia + suporte.</h2></div>
       <div class="prose">
-        <p>A Smart Repintura não é apenas uma loja que vende tinta. Reunimos produtos, colorimetria, suporte técnico, treinamentos, consultoria, serviços para cabines e soluções para laboratórios para que oficinas e profissionais pintem melhor, produzam mais e reduzam retrabalhos.</p>
-        ${lista(['Produtos para todas as etapas da repintura', 'Colorimetria', 'Suporte técnico', 'Treinamentos', 'Consultoria', 'Serviços para cabines de pintura', 'Soluções para laboratórios de colorimetria'])}
+        <p>A Smart Repintura não é apenas uma loja que vende tinta. Reunimos produtos, colorimetria, suporte técnico de produtos, treinamentos, consultoria em gestão de oficinas, manutenção em cabines e equipamentos e soluções para laboratórios para que oficinas e profissionais pintem melhor, produzam mais e evitem retrabalhos.</p>
+        ${lista(['Produtos para todas as etapas da repintura', 'Colorimetria', 'Suporte técnico de produtos', 'Treinamentos', 'Consultoria em gestão de oficinas', 'Manutenção em cabines e equipamentos', 'Soluções para laboratórios de colorimetria'])}
       </div>
     </div>`) + P.diferenciais() + P.marcas(base) + secao(`<div class="split">
       <div><span class="eyebrow">Onde estamos</span><h2>Ribeirão Preto - SP</h2></div>

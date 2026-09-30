@@ -43,6 +43,8 @@
 <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/></g></symbol>
 <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.5l1.8 4.6-2.3 1.4a11 11 0 0 0 5 5l1.4-2.3L19 14.5V18a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></g></symbol>
 <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></g></symbol>
+<symbol id="i-route" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.5 7-11.5A7 7 0 0 0 5 9.5C5 14.5 12 21 12 21Z"/><path d="M9.5 9.5 14.5 7.5 12.5 12.5 12 10z"/></g></symbol>
 <symbol id="i-tools" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 3.6a4.8 4.8 0 0 0-4.4 6.6L3.8 16.7a1.9 1.9 0 0 0 2.7 2.7l6.5-6.5a4.8 4.8 0 0 0 6.6-4.4l-2.9 1.4-2.5-2.5 1.4-2.9a4.8 4.8 0 0 0-.9-.9Z"/><path d="M4 4l5 5M3 6l3-3"/></g></symbol>
 <symbol id="i-wrench" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 3.6a4.8 4.8 0 0 0-4.4 6.6L3.8 16.7a1.9 1.9 0 0 0 2.7 2.7l6.5-6.5a4.8 4.8 0 0 0 6.6-4.4l-2.9 1.4-2.5-2.5 1.4-2.9a4.8 4.8 0 0 0-.9-.9Z"/></g></symbol>
 <symbol id="i-cap" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5 12 5l10 4.5L12 14 2 9.5Z"/><path d="M6 11.5V16c0 1.3 2.7 3 6 3s6-1.7 6-3v-4.5"/><path d="M22 9.5V15"/></g></symbol>
@@ -66,7 +68,16 @@
   <div class="container header-inner">
     <a class="brand" href="../index.html" aria-label="Smart Repintura — página inicial"><picture><source type="image/webp" srcset="../assets/icons/logo-web.webp"><img src="../assets/icons/logo-web.png" alt="Smart Repintura" width="450" height="300" decoding="async"></picture></a>
 
-    <nav class="main-nav" id="mainNav" aria-label="Menu principal">
+    <button class="search-bar" type="button" data-open-search><svg aria-hidden="true" focusable="false"><use href="#i-search"/></svg><span>Buscar produtos, soluções ou conteúdos</span><kbd aria-hidden="true">/</kbd></button>
+
+    <div class="header-actions">
+      <a class="btn btn-whats btn-sm header-wa" href="https://wa.me/5516997850858?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Smart%20Repintura%20e%20gostaria%20de%20atendimento." target="_blank" rel="noopener" aria-label="Comprar pelo WhatsApp"><svg aria-hidden="true" focusable="false"><use href="#i-whats"/></svg><span>Comprar pelo WhatsApp</span></a>
+      <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mainNav"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+
+  <nav class="main-nav" id="mainNav" aria-label="Menu principal">
+    <div class="nav-inner">
       <ul class="nav-list">
         <li><a href="../index.html">Início</a></li>
         <li class="has-sub">
@@ -77,7 +88,7 @@
         <li class="has-sub">
           <a href="../solucoes/index.html">Soluções</a>
           <button class="sub-toggle" type="button" aria-expanded="false" aria-label="Ver soluções"><svg aria-hidden="true" focusable="false"><use href="#i-caret"/></svg></button>
-          <ul class="sub-menu"><li><a href="../colorimetria/index.html">Colorimetria</a></li><li><a href="../treinamentos/index.html">Treinamentos</a></li><li><a href="../suporte-tecnico/index.html">Suporte Técnico</a></li><li><a href="../consultoria/index.html">Consultoria</a></li><li><a href="../cabines-de-pintura/index.html">Cabines de Pintura</a></li><li><a href="../laboratorios-colorimetria/index.html">Laboratórios de Colorimetria</a></li></ul>
+          <ul class="sub-menu"><li><a href="../colorimetria/index.html">Colorimetria</a></li><li><a href="../treinamentos/index.html">Treinamentos</a></li><li><a href="../suporte-tecnico/index.html">Suporte Técnico de Produtos</a></li><li><a href="../consultoria/index.html">Consultoria em Gestão de Oficinas</a></li><li><a href="../cabines-de-pintura/index.html">Manutenção em Cabines e Equipamentos</a></li><li><a href="../laboratorios-colorimetria/index.html">Laboratórios de Colorimetria</a></li></ul>
         </li>
         <li><a href="../colorimetria/index.html">Colorimetria</a></li>
         <li><a href="../treinamentos/index.html">Treinamentos</a></li>
@@ -88,14 +99,8 @@
         <button class="btn btn-outline full" type="button" data-open-search><svg aria-hidden="true" focusable="false"><use href="#i-search"/></svg> Buscar no site</button>
         <a class="btn btn-whats full" href="https://wa.me/5516997850858?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Smart%20Repintura%20e%20gostaria%20de%20atendimento." target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-whats"/></svg> Comprar pelo WhatsApp</a>
       </div>
-    </nav>
-
-    <div class="header-actions">
-      <button class="icon-btn search-btn" type="button" data-open-search aria-label="Buscar no site"><svg aria-hidden="true" focusable="false"><use href="#i-search"/></svg></button>
-      <a class="btn btn-whats btn-sm header-wa" href="https://wa.me/5516997850858?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Smart%20Repintura%20e%20gostaria%20de%20atendimento." target="_blank" rel="noopener" aria-label="Comprar pelo WhatsApp"><svg aria-hidden="true" focusable="false"><use href="#i-whats"/></svg><span>Comprar pelo WhatsApp</span></a>
-      <button class="burger" id="burgerBtn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mainNav"><span></span><span></span><span></span></button>
     </div>
-  </div>
+  </nav>
 </header>
 <main id="conteudo">
 <section class="page-hero">
@@ -113,8 +118,8 @@
 <section class="section"><div class="container"><div class="split">
       <div><span class="eyebrow">Quem somos</span><h2>Produto + conhecimento + tecnologia + suporte.</h2></div>
       <div class="prose">
-        <p>A Smart Repintura não é apenas uma loja que vende tinta. Reunimos produtos, colorimetria, suporte técnico, treinamentos, consultoria, serviços para cabines e soluções para laboratórios para que oficinas e profissionais pintem melhor, produzam mais e reduzam retrabalhos.</p>
-        <ul class="check-list"><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Produtos para todas as etapas da repintura</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Colorimetria</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Suporte técnico</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Treinamentos</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Consultoria</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Serviços para cabines de pintura</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Soluções para laboratórios de colorimetria</span></li></ul>
+        <p>A Smart Repintura não é apenas uma loja que vende tinta. Reunimos produtos, colorimetria, suporte técnico de produtos, treinamentos, consultoria em gestão de oficinas, manutenção em cabines e equipamentos e soluções para laboratórios para que oficinas e profissionais pintem melhor, produzam mais e evitem retrabalhos.</p>
+        <ul class="check-list"><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Produtos para todas as etapas da repintura</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Colorimetria</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Suporte técnico de produtos</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Treinamentos</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Consultoria em gestão de oficinas</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Manutenção em cabines e equipamentos</span></li><li><svg aria-hidden="true" focusable="false"><use href="#i-check"/></svg><span>Soluções para laboratórios de colorimetria</span></li></ul>
       </div>
     </div></div></section><section class="features" aria-label="Diferenciais da Smart Repintura">
     <ul class="container features-list">
@@ -125,18 +130,32 @@
       <li class="feature"><svg aria-hidden="true" focusable="false"><use href="#i-gear"/></svg><p><strong>Grandes marcas</strong><span>e tecnologia</span></p></li>
     </ul>
   </section><section class="brands" aria-labelledby="marcas-titulo">
-    <div class="container brands-inner">
+    <div class="container">
       <h2 class="eyebrow" id="marcas-titulo">Marcas que trabalhamos</h2>
-      <ul class="brands-row">
-        <li class="brand-logo brand-logo--texto">Autoluks</li>
-        <li class="brand-logo brand-logo--texto">Mirka</li>
-        <li class="brand-logo brand-logo--texto">Itaquá</li>
-        <li class="brand-logo brand-logo--texto">Adere</li>
-        <li class="brand-logo brand-logo--texto">Adelbras</li>
-        <li class="brand-logo brand-logo--texto">Norton</li>
-        <li class="brand-logo brand-logo--texto">Maxi Rubber</li>
-        <li class="brand-logo brand-logo--texto">Autoamérica</li>
-      </ul>
+    </div>
+    <div class="brands-marquee">
+      <div class="brands-track">
+        <ul class="brands-row">
+          <li class="brand-logo brand-logo--texto">Autoluks</li>
+          <li class="brand-logo brand-logo--texto">Mirka</li>
+          <li class="brand-logo brand-logo--texto">Itaquá</li>
+          <li class="brand-logo brand-logo--texto">Adere</li>
+          <li class="brand-logo brand-logo--texto">Adelbras</li>
+          <li class="brand-logo brand-logo--texto">Norton</li>
+          <li class="brand-logo brand-logo--texto">Maxi Rubber</li>
+          <li class="brand-logo brand-logo--texto">Autoamérica</li>
+        </ul>
+        <ul class="brands-row" aria-hidden="true">
+          <li class="brand-logo brand-logo--texto">Autoluks</li>
+          <li class="brand-logo brand-logo--texto">Mirka</li>
+          <li class="brand-logo brand-logo--texto">Itaquá</li>
+          <li class="brand-logo brand-logo--texto">Adere</li>
+          <li class="brand-logo brand-logo--texto">Adelbras</li>
+          <li class="brand-logo brand-logo--texto">Norton</li>
+          <li class="brand-logo brand-logo--texto">Maxi Rubber</li>
+          <li class="brand-logo brand-logo--texto">Autoamérica</li>
+        </ul>
+      </div>
     </div>
   </section><section class="section"><div class="container"><div class="split">
       <div><span class="eyebrow">Onde estamos</span><h2>Ribeirão Preto - SP</h2></div>
@@ -150,7 +169,7 @@
     <div class="fc-media" aria-hidden="true"><span class="fc-light"></span></div>
     <div class="container fc-inner">
       <div class="fc-text">
-        <h2 id="cta-titulo">Sua oficina pode produzir mais <br>e retrabalhar menos.</h2>
+        <h2 id="cta-titulo">Sua oficina pode produzir mais, <br>evitando retrabalhos.</h2>
         <p>Produtos, tecnologia, conhecimento e suporte técnico em um único lugar.</p>
       </div>
       <a class="btn btn-whats btn-lg" href="https://wa.me/5516997850858?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Smart%20Repintura%20e%20gostaria%20de%20falar%20com%20um%20especialista." target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-whats"/></svg> Falar com um Especialista <svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></a>
@@ -159,7 +178,14 @@
 </main>
 <footer class="site-footer">
   <div class="container footer-inner">
-    <a class="footer-brand" href="../index.html" aria-label="Smart Repintura — página inicial"><picture><source type="image/webp" srcset="../assets/icons/logo-web.webp"><img src="../assets/icons/logo-web.png" alt="Smart Repintura" width="450" height="300" loading="lazy" decoding="async"></picture></a>
+    <div class="footer-about">
+      <a class="footer-brand" href="../index.html" aria-label="Smart Repintura — página inicial"><picture><source type="image/webp" srcset="../assets/icons/logo-web.webp"><img src="../assets/icons/logo-web.png" alt="Smart Repintura" width="450" height="300" loading="lazy" decoding="async"></picture></a>
+      <ul class="footer-social" aria-label="Redes sociais">
+        <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg aria-hidden="true" focusable="false"><use href="#i-yt"/></svg></a></li>
+        <li><a href="https://instagram.com/smart.repintura" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true" focusable="false"><use href="#i-insta"/></svg></a></li>
+        <!-- Facebook: preencha contato.facebook em _componentes/dados.js e rode o gerador -->
+      </ul>
+    </div>
     <ul class="footer-info">
       <li><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg><span>Av. Marechal Costa e Silva, 3435<br>Ribeirão Preto - SP</span></li>
       <li class="fi-stack">
@@ -168,11 +194,12 @@
       </li>
       <li><svg aria-hidden="true" focusable="false"><use href="#i-clock"/></svg><span>Segunda a Sexta<br>7:30 às 17:18</span></li>
     </ul>
-    <ul class="footer-social" aria-label="Redes sociais">
-      <li><a href="https://youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg aria-hidden="true" focusable="false"><use href="#i-yt"/></svg></a></li>
-      <li><a href="https://instagram.com/smart.repintura" target="_blank" rel="noopener" aria-label="Instagram"><svg aria-hidden="true" focusable="false"><use href="#i-insta"/></svg></a></li>
-      <!-- Facebook: preencha contato.facebook em _componentes/dados.js e rode o gerador -->
-    </ul>
+    <div class="footer-map">
+      <div class="fm-frame">
+        <iframe src="https://www.google.com/maps?q=Smart%20Repintura%2C%20Av.%20Marechal%20Costa%20e%20Silva%2C%203435%20-%20Campos%20El%C3%ADsios%2C%20Ribeir%C3%A3o%20Preto%20-%20SP%2C%2014075-600&amp;z=16&amp;output=embed" title="Mapa com a localização da Smart Repintura" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <a class="btn btn-outline btn-sm fm-btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=Smart%20Repintura%2C%20Av.%20Marechal%20Costa%20e%20Silva%2C%203435%20-%20Campos%20El%C3%ADsios%2C%20Ribeir%C3%A3o%20Preto%20-%20SP%2C%2014075-600" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-route"/></svg> Como chegar</a>
+    </div>
   </div>
   <div class="container footer-bottom">
     <nav aria-label="Links do rodapé">
@@ -184,6 +211,7 @@
         <li><a href="../conteudos/index.html">Conteúdos</a></li>
         <li><a href="../sobre/index.html">A Smart</a></li>
         <li><a href="../contato/index.html">Contato</a></li>
+        <li><a class="fb-webmail" href="http://www.smartrepintura.com.br/webemail" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-mail"/></svg> Webmail</a></li>
       </ul>
     </nav>
     <p>© <span class="js-year">2026</span> Smart Repintura · Developed by Murilo</p>

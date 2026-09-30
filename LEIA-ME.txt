@@ -33,8 +33,8 @@ _componentes/
   paginas.js . textos das páginas internas
   gerar.js ... o gerador
 _originais/ ... arquivos que o site não usa, guardados para não perder: artes
-                originais em alta (logo.png, icon.png, hero-banner.png,
-                hero-banner2.png) e imagens antigas (yt-img, ml-img, zapzap-banner...).
+                originais em alta (logo.png, icon.png), os banners do hero com as
+                laterais borradas (*-com-borrado) e imagens antigas (yt-img, ml-img, zapzap-banner...).
 
 
 COMO EDITAR
@@ -57,17 +57,33 @@ PENDÊNCIAS (dados que só a Smart pode passar)
   Ex.: em youtube.com/watch?v=AbC123xYz o código é AbC123xYz.
   Com o código preenchido, a capa e o link do vídeo aparecem sozinhos.
 
+Webmail: o link do rodapé (ao lado de "Contato") vem de dados.js > contato.webmail.
+  Está em http:// porque o https do domínio ainda dá erro de certificado; quando o SSL
+  estiver certo, troque para https:// e rode o gerador.
+
+Mapinha do rodapé: o Google Maps procura o texto de dados.js > contato.mapaBusca;
+o botão "Como chegar" abre a rota até esse endereço (no celular, no app de mapas).
+
 
 FOTOS (coloque o arquivo com o nome exato e rode o gerador)
 -----------------------------------------------------------
 Hero ............ 2 banners de fundo, trocando sozinhos (6 s cada), com o título
-                  do site por cima (computador: à esquerda · celular: no terço de baixo).
+                  do site por cima (computador: à esquerda · celular: na metade de baixo).
                   A tag <picture> escolhe a arte certa para cada aparelho.
+                  O hero fica com a MESMA PROPORÇÃO da arte: a imagem aparece inteira,
+                  sem cortes e sem fundo borrado. Tamanhos:
+                    Computador, tela cheia ..... 1920 x 1080 px (16:9)
+                    Computador, faixa .......... 1600 x 500 px ou 1200 x 400 px
+                    Celular .................... 800 x 1200 px ou 1080 x 1920 px (vertical)
+                  Use o mesmo tamanho nos 2 banners (o hero segue o 1º).
+                  Deixe sem texto importante a metade esquerda da arte de computador e a
+                  metade de baixo da de celular: é onde fica o título do site.
                   Pasta assets/images/hero/:
-                    hero-banner-desktop.png  e  hero-banner2-desktop.jpg ... 1920 x 600 (computador/tablet)
-                    hero-banner-mobile.jpg   e  hero-banner2-mobile.jpg .... 400 x 600 (celular)
+                    hero-banner-desktop.png  e  hero-banner2-desktop.jpg ... computador/tablet
+                    hero-banner-mobile.jpg   e  hero-banner2-mobile.jpg .... celular
+                  (Os atuais são as artes originais sem as laterais borradas: 1064 x 600 no
+                  computador. As versões com borrado estão em _originais/.)
                   Para trocar um banner: substitua o arquivo mantendo o nome e rode o gerador.
-                  (Se tiver as artes de celular em 800 x 1200, use: ficam mais nítidas.)
                   Para adicionar um 3º banner ou mudar o tempo: dados.js > heroSlides / heroTempo.
 Categorias ...... assets/images/categorias/<categoria>.jpg  (800 x 600 px)
                   abrasivos.jpg  mascaramento.jpg  preparacao.jpg

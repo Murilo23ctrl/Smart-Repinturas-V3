@@ -46,17 +46,18 @@
   --container:1320px;
   --gutter:18px;
   --header-h:66px;
+  --nav2-h:0px;               /* 2ª faixa do header (só no computador) */
   --section-y:64px;
 }
 @media (min-width:600px){ :root{ --gutter:28px; } }
 @media (min-width:900px){ :root{ --section-y:84px; } }
-@media (min-width:1240px){ :root{ --gutter:48px; --header-h:82px; --section-y:96px; } }
+@media (min-width:1240px){ :root{ --gutter:48px; --header-h:78px; --nav2-h:48px; --section-y:96px; } }
 
 /* =========================================================
    BASE
 ========================================================= */
 *, *::before, *::after{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; scroll-padding-top:calc(var(--header-h) + 12px); }
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; scroll-padding-top:calc(var(--header-h) + var(--nav2-h) + 12px); }
 body{
   background:var(--black-0);
   color:var(--white);
@@ -207,7 +208,7 @@ h1 em, h2 em{
 .icon-btn:hover{ color:#fff; background:rgba(255,255,255,.08); }
 
 /* =========================================================
-   HEADER — celular: logo + WhatsApp + menu · computador (≥1240px): menu completo
+   HEADER — celular: logo + WhatsApp + menu ☰ · computador (≥1240px): 2 faixas (logo/busca/WhatsApp + navbar)
 ========================================================= */
 .site-header{
   position:sticky;
@@ -236,7 +237,7 @@ h1 em, h2 em{
 }
 
 .header-actions{ display:flex; align-items:center; gap:8px; }
-.search-btn{ display:none; }
+.search-bar{ display:none; }   /* só no computador (no celular a busca fica no menu ☰) */
 .header-wa{ width:42px; min-height:42px; padding:0; border-radius:50%; }
 .header-wa span{ display:none; }
 .header-wa svg{ width:20px; height:20px; }
@@ -260,9 +261,6 @@ h1 em, h2 em{
   height:100vh;
   height:100dvh;
   z-index:1050;
-  display:flex;
-  flex-direction:column;
-  gap:24px;
   padding:88px 22px 28px;
   overflow-y:auto;
   background:var(--black-1);
@@ -272,6 +270,7 @@ h1 em, h2 em{
   transition:transform .4s var(--ease), visibility .4s;
 }
 .main-nav.open{ transform:none; visibility:visible; }
+.nav-inner{ display:flex; flex-direction:column; gap:24px; }
 .nav-list > li{ position:relative; display:flex; flex-wrap:wrap; align-items:center; border-bottom:1px solid var(--line); }
 .nav-list > li > a{ flex:1; padding:14px 0; font-size:.98rem; font-weight:600; color:var(--gray-light); }
 .nav-list > li > a.active{ color:#fff; }
@@ -289,42 +288,69 @@ h1 em, h2 em{
 .sub-menu a:hover{ color:#fff; background:rgba(169,193,209,.1); }
 .nav-extra{ display:flex; flex-direction:column; gap:10px; }
 
+/* computador: header em 2 faixas — 1ª logo + busca + WhatsApp · 2ª (navbar) só com os itens do menu */
 @media (min-width:1240px){
+  .header-inner{ gap:24px; }
+  .brand{ margin-right:0; }
   .brand img{ height:120px; }
   .site-header.scrolled .brand img{ height:108px; }
   .burger, .nav-extra{ display:none; }
-  .search-btn{ display:inline-flex; }
   .header-wa{ width:auto; min-height:42px; padding:9px 18px; border-radius:7px; }
   .header-wa span{ display:inline; }
 
+  .search-bar{
+    display:flex; align-items:center; gap:10px;
+    flex:0 1 460px; height:42px; margin:0 auto; padding:0 8px 0 16px;
+    border:1px solid var(--line-strong); border-radius:999px;
+    background:rgba(255,255,255,.04);
+    color:var(--gray-mid); font-size:.84rem; text-align:left;
+    transition:border-color .2s, background-color .2s, color .2s;
+  }
+  .search-bar svg{ width:18px; height:18px; color:var(--steel-text); }
+  .search-bar span{ flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .search-bar kbd{
+    display:grid; place-items:center; min-width:26px; height:26px;
+    border:1px solid var(--line-strong); border-radius:6px;
+    font:600 .75rem var(--font); color:var(--gray-light);
+  }
+  .search-bar:hover{ border-color:var(--steel-text); background:rgba(169,193,209,.08); color:var(--gray-light); }
+
+  /* 2ª faixa */
   .main-nav{
-    position:static;
+    position:relative;
     width:auto; height:auto;
     padding:0;
     overflow:visible;
-    background:none;
+    background:rgba(255,255,255,.025);
     border:0;
+    border-top:1px solid var(--line);
     transform:none;
     visibility:visible;
     transition:none;
-    margin-right:6px;
   }
-  .nav-list{ display:flex; align-items:center; gap:clamp(14px, 1.5vw, 24px); }
-  .nav-list > li{ border:0; flex-wrap:nowrap; height:var(--header-h); gap:2px; }
+  .nav-inner{
+    flex-direction:row;
+    max-width:calc(var(--container) + var(--gutter) * 2);
+    margin:0 auto;
+    padding:0 var(--gutter);
+  }
+  .nav-list{ display:flex; align-items:center; gap:clamp(22px, 2.6vw, 40px); }
+  .nav-list > li{ border:0; flex-wrap:nowrap; height:var(--nav2-h); gap:2px; }
   .nav-list > li > a{
     position:relative;
-    padding:6px 0;
+    display:flex; align-items:center; height:100%;
+    padding:0;
     font-size:.86rem;
     font-weight:500;
     white-space:nowrap;
     transition:color .2s;
   }
   .nav-list > li > a:hover{ color:#fff; }
-  /* item ativo: pequena faixa colorida da logo */
+  /* item ativo: faixa colorida da logo no pé da navbar */
   .nav-list > li > a.active::after{
     content:"";
-    position:absolute; left:0; right:0; bottom:-6px;
-    height:2px; border-radius:2px;
+    position:absolute; left:0; right:0; bottom:0;
+    height:2px; border-radius:2px 2px 0 0;
     background:var(--rgb-grad);
   }
   .sub-toggle{ width:22px; height:22px; }
@@ -332,7 +358,7 @@ h1 em, h2 em{
   .sub-menu{
     display:block;
     position:absolute;
-    top:calc(100% - 8px); left:-14px;
+    top:100%; left:-14px;
     min-width:250px;
     padding:10px;
     background:rgba(12,13,16,.98);
@@ -356,13 +382,20 @@ h1 em, h2 em{
 
 /* =========================================================
    HERO — texto por cima dos banners da Smart (trocam sozinhos)
-   celular (até 599px): banner vertical 400x600 no alto; o texto fica sobre o terço de baixo dele
-   a partir de 600px: banner largo 1920x600 de fundo; texto à esquerda, sobre uma sombra escura
+   O hero tem a mesma proporção das artes, então a imagem aparece inteira, sem cortes
+   (o gerador lê o tamanho do 1º banner e grava --hero-ar-d e --hero-ar-m no <section class="hero">):
+     computador: 1920x1080 (16:9) = tela cheia · 1600x500 ou 1200x400 = faixa
+     celular:    800x1200 ou 1080x1920 (vertical)
+   Só se o texto precisar de mais altura que a arte (telas estreitas) o hero cresce
+   e a arte corta um pouco das bordas (object-fit: cover).
+   celular (até 599px): texto sobre a parte de baixo do banner vertical
+   a partir de 600px: banner largo; texto à esquerda, sobre uma sombra escura
 ========================================================= */
 .hero{
-  position:relative; overflow:hidden;
+  position:relative;
+  overflow:hidden; overflow:clip;   /* "clip" (e não "hidden") deixa o hero crescer se o texto não couber */
   display:flex; flex-direction:column; justify-content:flex-end;
-  min-height:calc(150vw + 165px);   /* celular: altura do banner (2:3) + o que o texto passa dele */
+  aspect-ratio:var(--hero-ar-m, 2 / 3);
   background:var(--black-0);
 }
 .hero-inner{ position:relative; z-index:2; padding-top:24px; padding-bottom:76px; pointer-events:none; }  /* deixa clicar nos indicadores */
@@ -394,16 +427,20 @@ h1 em, h2 em{
 .slogan-bar{ flex:none; width:40px; height:3px; border-radius:3px; background:var(--rgb-grad); }
 
 /* banners empilhados atrás do texto; só o ".is-active" aparece (troca com fade) */
-.hero-media{ position:absolute; inset:0; z-index:0; container-type:size; }
-.hero-slide{ position:absolute; inset:0 0 auto; height:150vw; opacity:0; transition:opacity 1.2s ease; }
+.hero-media{ position:absolute; inset:0; z-index:0; }
+.hero-slide{ position:absolute; inset:0; opacity:0; transition:opacity 1.2s ease; }
 .hero-slide.is-active{ opacity:1; }
 .hero-slide picture{ display:block; height:100%; }
 .hero-slide img{ width:100%; height:100%; object-fit:cover; }
 /* sombra que dá leitura ao texto (fica em cada banner e troca junto com ele)
-   celular: de baixo para cima, fundindo o fim do banner no preto */
+   celular: de baixo para cima, atrás do texto (em px: acompanha o texto, qualquer que seja a altura do banner) */
 .hero-slide::after{
   content:""; position:absolute; inset:0; pointer-events:none;
-  background:linear-gradient(0deg, var(--black-0) 0%, rgba(5,5,5,.57) 22%, rgba(5,5,5,.17) 40%, rgba(5,5,5,0) 50%);
+  background:linear-gradient(0deg, rgba(5,5,5,.88) 0, rgba(5,5,5,.66) 188px, rgba(5,5,5,.34) 317px, rgba(5,5,5,.1) 418px, rgba(5,5,5,0) 476px);
+}
+/* banner com texto na altura do título (dados.js > sombraForte): mais escuro atrás do título */
+.hero-slide--sombra-forte::after{
+  background:linear-gradient(0deg, rgba(5,5,5,.9) 0, rgba(5,5,5,.8) 216px, rgba(5,5,5,.7) 289px, rgba(5,5,5,.3) 361px, rgba(5,5,5,0) 418px);
 }
 
 /* indicadores: a barrinha com as cores da logo enche no tempo de cada imagem */
@@ -451,14 +488,25 @@ h1 em, h2 em{
 
 /* a partir de 600px: banner largo de fundo, texto à esquerda */
 @media (min-width:600px){
-  .hero{ min-height:clamp(480px, 40vw, 640px); justify-content:center; }
-  .hero-inner{ padding-top:56px; padding-bottom:56px; }
+  /* proporção da arte de computador (1920x1080 → tela cheia; 1600x500 → faixa), mas nunca mais alto
+     que a tela: termina 2px antes do fim dela, para a barra colorida dos diferenciais aparecer */
+  .hero{
+    justify-content:center;
+    aspect-ratio:auto;
+    min-height:calc(100vw / (var(--hero-ar-d, 16 / 9)));
+    min-height:min(calc(100vw / (var(--hero-ar-d, 16 / 9))), calc(100svh - var(--header-h) - var(--nav2-h) - 2px));
+  }
+  /* se a tela for mais baixa que a arte, ela continua inteira (menor), encostada à direita;
+     o lado esquerdo fica preto, atrás do título, e a borda da arte se esfuma nele */
+  .hero-slide picture{
+    position:absolute; top:0; right:0; bottom:0;
+    aspect-ratio:var(--hero-ar-d, 16 / 9); max-width:100%;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 14%);
+            mask-image:linear-gradient(90deg, transparent, #000 14%);
+  }
+  .hero-inner{ padding-top:48px; padding-bottom:48px; }
   .hero-slogan{ letter-spacing:.22em; }
   .slogan-bar{ width:56px; }
-  .hero-slide{ inset:0; height:auto; }
-  /* encosta a arte do banner na direita, para o texto ficar sobre o fundo desfocado dele:
-     a arte termina no px 1492 de 1920 (altura 600), então a borda direita = 1492/600 = 2,4867 x a altura */
-  .hero-slide img{ object-position:min(0px, calc(100cqw - 248.67cqh)) 50%; }
   .hero-slide::after{
     background:
       linear-gradient(90deg, rgba(5,5,5,.73) 0%, rgba(5,5,5,.59) 30%, rgba(5,5,5,.27) 48%, rgba(5,5,5,0) 62%),
@@ -577,19 +625,7 @@ h1 em, h2 em{
 }
 .sol-ph{ width:62px; height:62px; color:var(--steel-text); opacity:.8; }
 .sol-body{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; padding:18px 18px 20px; }
-.sol-brand{ display:flex; flex-direction:column; line-height:1; margin-bottom:8px; }
-.sb-smart{
-  font-size:1.3rem;
-  font-weight:800;
-  font-style:italic;
-  letter-spacing:-.02em;
-  background:var(--chrome-text);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.sb-name{ margin-top:4px; font-size:.7rem; font-weight:600; letter-spacing:.32em; color:#fff; }
-.sol-card h3{ font-size:.96rem; }
+.sol-card h3{ font-size:1.02rem; }
 .sol-card p{ font-size:.82rem; line-height:1.45; color:var(--gray-mid); }
 .sol-btn{ width:100%; margin-top:auto; }
 .sol-body p + .sol-btn{ margin-top:12px; }
@@ -689,21 +725,32 @@ h1 em, h2 em{
    MARCAS (faixa clara)
 ========================================================= */
 .brands{ background:#fff; color:var(--ink); padding:40px 0; border-top:1px solid var(--light-1); }
-.brands-inner{ display:flex; flex-direction:column; gap:16px; }
-.brands .eyebrow{ margin:0; color:var(--steel-700); font-size:.72rem; font-weight:700; }
-.brands-row{
-  display:flex; align-items:center; gap:40px;
-  overflow-x:auto;
-  scroll-snap-type:x proximity;
-  scrollbar-width:none;
-  padding:6px 0;
+.brands .eyebrow{ margin:0 0 18px; color:var(--steel-700); font-size:.72rem; font-weight:700; }
+/* faixa que roda sozinha: 2 cópias da lista lado a lado; quando a 1ª sai inteira, o giro recomeça sem emenda.
+   Cada cópia tem no mínimo a largura da tela, para nunca sobrar buraco em telas largas. */
+.brands-marquee{
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-.brands-row::-webkit-scrollbar{ display:none; }
-.brand-logo{ flex-shrink:0; scroll-snap-align:start; }
+.brands-track{ display:flex; width:max-content; animation:marcas-rodar 34s linear infinite; }
+.brands-marquee:hover .brands-track{ animation-play-state:paused; }
+.brands-row{
+  display:flex; align-items:center; justify-content:space-around; gap:56px;
+  min-width:100vw;
+  padding:6px 28px;
+}
+@keyframes marcas-rodar{ to{ transform:translateX(-50%); } }
+.brand-logo{ flex-shrink:0; }
 .brand-logo img{ height:34px; width:auto; filter:grayscale(1); opacity:.8; transition:filter .3s, opacity .3s; }
 .brand-logo img:hover{ filter:none; opacity:1; }
 .brand-logo--texto{ font-size:1.12rem; font-weight:800; font-style:italic; letter-spacing:-.01em; text-transform:uppercase; color:#2b3137; white-space:nowrap; }
-@media (min-width:1000px){ .brands-row{ justify-content:space-between; overflow:visible; } }
+/* quem pede menos movimento: faixa parada, dá para arrastar para o lado */
+@media (prefers-reduced-motion: reduce){
+  .brands-track{ animation:none; }
+  .brands-marquee{ overflow-x:auto; scrollbar-width:none; -webkit-mask-image:none; mask-image:none; }
+  .brands-row[aria-hidden="true"]{ display:none; }
+}
 
 /* =========================================================
    CTA FINAL
@@ -736,7 +783,8 @@ h1 em, h2 em{
    RODAPÉ
 ========================================================= */
 .site-footer{ background:var(--black-0); border-top:1px solid var(--line); }
-.footer-inner{ display:grid; gap:26px; padding-top:40px; padding-bottom:30px; }
+.footer-inner{ display:grid; gap:28px; padding-top:40px; padding-bottom:32px; }
+.footer-about{ display:flex; flex-direction:column; gap:20px; }
 .footer-brand{ display:inline-block; width:fit-content; }
 .footer-brand img{ width:170px; margin:-24px 0 -31px -15px; }   /* compensa a margem transparente da logo */
 .footer-info{ display:grid; gap:18px; }
@@ -766,9 +814,31 @@ h1 em, h2 em{
 }
 .footer-bottom ul{ display:flex; flex-wrap:wrap; gap:8px 18px; }
 .footer-bottom a:hover{ color:#fff; }
+.footer-bottom ul a{ display:inline-flex; align-items:center; min-height:24px; }   /* área de toque mínima */
+.fb-webmail{ gap:6px; }
+.fb-webmail svg{ width:15px; height:15px; }
+
+/* mapinha do endereço + botão "Como chegar" (abre a rota no Google Maps / app de mapas) */
+.footer-map{ display:flex; flex-direction:column; gap:10px; }
+.fm-frame{
+  position:relative; height:190px;
+  border-radius:var(--radius-sm); overflow:hidden;
+  border:1px solid var(--line-strong);
+  background:var(--black-2);
+}
+.fm-frame iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+.fm-btn{ width:100%; }
+
+@media (min-width:700px){
+  .footer-inner{ grid-template-columns:auto 1fr; column-gap:48px; }
+  .footer-map{ grid-column:1 / -1; }
+  .fm-frame{ height:220px; }
+}
 @media (min-width:1000px){
-  .footer-inner{ grid-template-columns:auto 1fr auto; align-items:center; gap:40px; }
-  .footer-info{ grid-template-columns:repeat(3, auto); justify-content:center; gap:40px; }
+  .footer-inner{ grid-template-columns:auto 1fr minmax(280px, 360px); align-items:start; gap:48px; }
+  .footer-info{ padding-top:8px; }
+  .footer-map{ grid-column:auto; }
+  .fm-frame{ height:170px; }
   .footer-bottom{ flex-direction:row; align-items:center; justify-content:space-between; }
 }
 
